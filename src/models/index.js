@@ -7,7 +7,7 @@ const personSchema = require('./person.schema.js');
 
 const DATABASE_URL = process.env.NODE_ENV === 'test'
   ? 'sqlite::memory'
-  : process.env.DATABASE_URL || 'postgres://localhost:5432/401d47-api-app';
+  : process.env.DATABASE_URL || 'postgres://localhost:5432/api-server';
 
 const sequelize = new Sequelize(DATABASE_URL);
 

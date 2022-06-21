@@ -2,7 +2,7 @@
 
 class modelInterface {
   constructor(model) {
-    this.model - model;
+    this.model = model;
   }
 
   async create(json) {
@@ -35,9 +35,11 @@ class modelInterface {
     }
   }
 
-  update(id) {
+  async update(id) {
     try {
-      null;
+      await this.model.update({where: { id }});
+      let updatedInstance = await this.model.findOne({where: { id } });
+      return updatedInstance;
     } catch (err) {
       console.error(err);
       return err;
