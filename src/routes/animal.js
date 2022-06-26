@@ -28,13 +28,15 @@ router.get('/animal/:id', async (req, res, next) => {
 // PUT
 router.put('/animal/:id', async (req, res, next) => {
   let { id } = req.params;
-  await animalInterface.update(id);
-  let updatedAnimal = await animalInterface.readOne(id);
+  let updatedAnimal = await animalInterface.update(req.body, id);
   res.status(200).send(updatedAnimal);
 });
 
 // DELETE
 router.delete('/animal/:id', async (req, res, next) => {
   let { id } = req.params;
-  // MAKE SURE UPDATE AND DELETE ARE CORRECT
+  let deletedAnimal = await animalInterface.delete(id);
+  res.status(200).send(deletedAnimal);
 });
+
+module.exports = router;

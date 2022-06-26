@@ -15,16 +15,6 @@ class modelInterface {
     }
   }
 
-  async readOne(id) {
-    try {
-      let oneInstance = await this.model.findOne({ where: { id } });
-      return oneInstance;
-    } catch (err) {
-      console.error(err);
-      return err;
-    }
-  }
-
   async readAll() {
     try {
       let allInstances = await this.model.findAll();
@@ -35,9 +25,19 @@ class modelInterface {
     }
   }
 
-  async update(id) {
+  async readOne(id) {
     try {
-      await this.model.update({where: { id }});
+      let oneInstance = await this.model.findOne({where: { id } });
+      return oneInstance;
+    } catch (err) {
+      console.error(err);
+      return err;
+    }
+  }
+
+  async update(requestBody, id) {
+    try {
+      await this.model.update(requestBody, {where: { id }});
       let updatedInstance = await this.model.findOne({where: { id } });
       return updatedInstance;
     } catch (err) {
@@ -48,8 +48,8 @@ class modelInterface {
 
   async delete(id) {
     try {
-      let deletedInstance = await this.model.findOne({ where: { id } });
-      await this.model.destroy({ where: { id } });
+      let deletedInstance = await this.model.findOne({where: { id } });
+      await this.model.destroy({where: { id } });
       return deletedInstance;
     } catch (err) {
       console.error(err);
